@@ -7,3 +7,5 @@
 
 ls /data/*/conf/init.sh 2>/dev/null 1>/dev/null && /data/*/conf/init.sh || echo
 
+service tomcat7 start
+
