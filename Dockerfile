@@ -11,4 +11,6 @@ RUN add-apt-repository -y ppa:webupd8team/java && apt-get update && apt-get inst
 	&& apt-get clean &&  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN curl -sSL https://raw.githubusercontent.com/v7soft/tomcat7/master/tomcat-users.xml > /etc/tomcat7/tomcat-users.xml \
-	&& curl -sSL https://raw.githubusercontent.com/v7soft/tomcat7/master/init.sh > /etc/my_init.d/init.sh && chmod +x /etc/my_init.d/init.sh
+	&& curl -sSL https://raw.githubusercontent.com/v7soft/tomcat7/master/init.sh > /etc/my_init.d/init.sh && chmod +x /etc/my_init.d/init.sh \
+	&& sed -i '/JAVA_OPTS/d' /etc/default/tomcat7 \
+	&& echo JAVA_OPTS=\"-Djava.awt.headless=true -Xmx1g -XX:PermSize=128m -XX:MaxPermSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/\" >> /etc/default/tomcat7
